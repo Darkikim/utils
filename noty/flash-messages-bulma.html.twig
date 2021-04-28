@@ -1,0 +1,31 @@
+{# Alert Bulma : [primary, link, info, success, warning, danger] #}
+
+{% for label, messages in app.flashes %}
+    {% if app.environment is same as('dev') %}
+        <!-- {{ label }} -->
+    {% endif %}
+    <div class="flash-message-wrapper">
+        <div class="container">
+            {% for message in messages %}
+                <div class="flash-message notification is-{{ label }} fade show" role="alert">
+                    <button class="delete"></button>
+                    <div class="message">{{ message|raw }}</div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% if app.environment is same as('dev') %}
+        <!-- {{ label }} -->
+    {% endif %}
+{% endfor %}
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        (document.querySelectorAll('.notification .delete') || []).forEach(($delete) => {
+            const $notification = $delete.parentNode;
+
+            $delete.addEventListener('click', () => {
+                $notification.parentNode.removeChild($notification);
+            });
+        });
+    });
+</script>

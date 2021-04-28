@@ -1,0 +1,24 @@
+{% for label, messages in app.flashes %}
+    {% if app.environment is same as('dev') %}
+    <!-- {{ label }} -->
+    {% endif %}
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            {% set count = 0 %}
+            {% for message in messages %}
+
+            new Noty({
+                theme: "bootstrap-v4",
+                type: '{{ label }}',
+                layout: 'topRight',
+                text: '{{ message|raw }}',
+                timeout: 2000 + {{ count }} * 1000,
+            }).show();
+            {% set count = count + 1 %}
+            {% endfor %}
+        });
+    </script>
+    {% if app.environment is same as('dev') %}
+    <!-- {{ label }} -->
+    {% endif %}
+{% endfor %}

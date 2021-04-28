@@ -1,0 +1,22 @@
+{# Alert Bootstrap : [primary, secondary, success, danger, warning, info, light, dark] #}
+
+{% for label, messages in app.flashes %}
+    {% if app.environment is same as('dev') %}
+        <!-- {{ label }} -->
+    {% endif %}
+    <div class="flash-message-wrapper">
+        <div class="container">
+            {% for message in messages %}
+                <div class="flash-message alert alert-{{ label }} alert-dismissible fade show" role="alert">
+                    <div class="message">{{ message|raw }}</div>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% if app.environment is same as('dev') %}
+        <!-- {{ label }} -->
+    {% endif %}
+{% endfor %}
